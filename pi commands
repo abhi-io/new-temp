@@ -1,0 +1,400 @@
+from picamera import PiCamera
+from time import sleep
+
+# Also import these two modules
+from picamera.array import PiRGBArray
+import cv2
+
+# Set up PiCamera and let it warm up
+camera = PiCamera()
+raw = PiRGBArray(camera)
+time.sleep(0.1)
+
+
+# Capture to a PiRGBArray
+camera.capture(raw, format="bgr")
+image = raw.array
+
+# Use OpenCV's gui to show the image
+cv2.imshow("Preview", image)
+cv2.waitKey(0) # Wait for key press to close preview
+
+
+~ $ cat history.txt 
+    1  sudo su
+    2  ifconfig
+    3  sudo apt-get install vlc
+    4  sudo apt-get install nmap
+    5  cd ..
+    6  ls
+    7  cd etc/apt/apt.conf.d/
+    8  ls
+    9  sudo nano 10proxy
+   10  sudo apt-get install nmap
+   11  nmap
+   12  cd ..
+   13  ls
+   14  ls environment 
+   15  cat environment 
+   16  sudo nano /etc/environment
+   17  cat environment 
+   18  sudo nano /etc/environment
+   19  ls
+   20  ls -al environment 
+   21  chmod 777 environment 
+   22  sudo chmod 777 environment 
+   23  ls
+   24  cat environment 
+   25  ls
+   26  cal
+   27  ping 192.168.0.1
+   28  sudo poweroff
+   29  ifconfig
+   30  ls
+   31  ll
+   32  l
+   33  ls
+   34  l
+   35  sudo apt-get update
+   36  cd ..
+   37  cd .
+   38  cd ..
+   39  cd etc/
+   40  ls
+   41  history
+   42  cd
+   43  cd ..
+   44  cd etc/apt/
+   45  ls
+   46  cd apt.conf.d/
+   47  ls
+   48  sudo nano 10proxy 
+   49  sudo apt-get update
+   50  sudo apt-get install python3.5
+   51  python -V
+   52  python3 -V
+   53  sudo apt-get -y install python3-pip
+   54  pip3
+   55  cd
+   56  pwd
+   57  ls
+   58  mkdir grp5
+   59  ls
+   60  sudo pip install opencv-python3
+   61  sudo pip3 install opencv-python3
+   62  sudo pip3 install opencv-python
+   63  sudo pip3 install urllib3
+   64  python3
+   65  python
+   66  sudo apt-get install python-opencv
+   67  sudo apt-get install python3-opencv
+   68  ls
+   69  nano temp.py
+   70  python temp.py 
+   71  nano temp.py
+   72  python temp.py 
+   73  sudo pip3 install gpiozero
+   74  nano temp.py
+   75  python temp.py 
+   76  sudo -H pip3 install --upgrade pip
+   77  sudo -H pip3 install --upgrade pip3
+   78  sudo pip3 install numpy scipy
+   79  vim
+   80  VIm
+   81  Vim
+   82  sudo apt-get install vim
+   83  sudo pip3 install opencv-python
+   84  python3
+   85  sudo pip3 install opencv-python
+   86  python3
+   87  nautu
+   88  python
+   89  cd grp5
+   90  sudo apt-get install nautilus
+   91  nautilus
+   92  scp /home/abc/Desktop/people-shop.mp4 pi@192.168.43.40
+   93  cd
+   94  ls
+   95  sudo apt-get install git
+   96  python temp.py 
+   97  sudo pip3 install matplotlib
+   98  sudo pip install matplotlib
+   99  nano temp.py 
+  100  pyhton temp.py 
+  101  python temp.py 
+  102  python3 temp.py 
+  103  nano temp.py 
+  104  clear
+  105  sudo apt-get install apache2
+  106  cd ..
+  107  cd var/www/
+  108  ls
+  109  chmod 777 *
+  110  sudo chmod 777 *
+  111  cd html/
+  112  la
+  113  ls
+  114  chmod 777 *
+  115  sudo chmod 777 *
+  116  nano index.html 
+  117  sudo apt-get install mysql-server
+  118  exit
+  119  vim temp.py 
+  120  pyhton temp.py 
+  121  act temp.py 
+  122  nano temp.py 
+  123  pyhton temp.py 
+  124  pyhton
+  125  pyhton3
+  126  python temp.py 
+  127  nano temp.py 
+  128  python temp.py 
+  129  nano temp.py 
+  130  python temp.py 
+  131  python3 temp.py 
+  132  ls
+  133  ld
+  134  ls
+  135  sudo poweroff
+  136  sql
+  137  my-sql
+  138  MySql
+  139  git
+  140  ls
+  141  python temp.py 
+  142  cat temp.py 
+  143  nano temp.py 
+  144  python temp.py 
+  145  nano temp.py 
+  146  python temp.py 
+  147  nano temp.py 
+  148  python temp.py 
+  149  python~ temp.py 
+  150  python3 temp.py 
+  151  nano temp.py 
+  152  python3 temp.py 
+  153  nano temp.py 
+  154  python3 temp.py 
+  155  nano temp.py 
+  156  python3 temp.py 
+  157  nano temp.py 
+  158  python3 temp.py 
+  159  nano temp.py 
+  160  sudo apt-get install phpmyadmin
+  161  sudo apt-get install mysql-server
+  162  ifconfig
+  163  nmap 192.168.43.1/24
+  164  nano temp.py 
+  165  python temp.py 
+  166  nano temp.py 
+  167  python temp.py 
+  168  nano temp.py 
+  169  python temp.py 
+  170  nano temp.py 
+  171  python temp.py 
+  172  nano temp.py 
+  173  python temp.py 
+  174  nano temp.py 
+  175  python temp.py 
+  176  nano temp.py 
+  177  python temp.py 
+  178  nano temp.py 
+  179  python temp.py 
+  180  nano temp.py 
+  181  python temp.py 
+  182  python
+  183  nano temp.py 
+  184  python
+  185  python temp.py 
+  186  python3 temp.py 
+  187  python temp.py 
+  188  nano temp.py 
+  189  python temp.py 
+  190  python3 temp.py 
+  191  python temp.py 
+  192  python3 temp.py 
+  193  nano temp.py 
+  194  python3 temp.py 
+  195  python temp.py 
+  196  python3 temp.py 
+  197  python temp.py 
+  198  nano temp.py 
+  199  python temp.py 
+  200  python3 temp.py 
+  201  nano temp.py 
+  202  python3 temp.py 
+  203  python temp.py 
+  204  python3 temp.py 
+  205  python temp.py 
+  206  nano temp.py 
+  207  python temp.py 
+  208  python3 temp.py 
+  209  nano temp.py 
+  210  python3 temp.py 
+  211  nano temp.py 
+  212  python3 temp.py 
+  213  nano temp.py 
+  214  python3 temp.py 
+  215  nano temp.py 
+  216  python3 temp.py 
+  217  nano temp.py 
+  218  python3 temp.py 
+  219  nano temp.py 
+  220  python3 temp.py 
+  221  nano temp.py 
+  222  python3 temp.py 
+  223  nano temp.py 
+  224  python3 temp.py 
+  225  sudo apt-get install -f mysql-server
+  226  mysql-server mysql-server
+  227  sudo apt-get remove mysql-server
+  228  sudo apt-get purge mysql-server
+  229  sudo apt-get remove mysql
+  230  sudo apt-get purge mysql-server
+  231  sudo apt-get install -f mysql-server
+  232  sudo pip install progress
+  233  sudo apt-get install phpmyadmin
+  234  sudo lsof /var/lib/dpkg/lock
+  235  sudo apt-get update
+  236  reboot
+  237  sudo reboot
+  238  cd ..
+  239  ls
+  240  cd etc/
+  241  nano environment
+  242  cd apt/
+  243  ls
+  244  cd apt.conf.d/
+  245  ls
+  246  sudo nano 10proxy 
+  247  exit
+  248  ifconfig
+  249  sudo apt-get install mysql-server
+  250  ifconfig
+  251  mysql-server
+  252  sudo apt-get install mysql-server
+  253  mysql
+  254  sudo du
+  255  sudo su
+  256  ls
+  257  nano temp.py
+  258  python temp.py 
+  259  nan
+  260  ls
+  261  cd grp5/
+  262  ls
+  263  nano streamer.py
+  264  python streamer.py 
+  265  sudo apt-get install zeromq
+  266  git clone https://github.com/zeromq/libzmq
+  267  cd libzmq
+  268  mkdir cmake-build && cd cmake-build
+  269  cmake .. && make -j 4
+  270  ls
+  271  ll
+  272  ls
+  273  ls -al
+  274  cd ..
+  275  ls 
+  276  mkdir cmake-build && cd cmake-build
+  277  cmake .. && make -j 4
+  278  make test && make install && sudo ldconfig`
+  279  ls
+  280  cd ..
+  281  ls
+  282  ll
+  283  ls
+  284  rm -rf libzmq/
+  285  ls
+  286  sudo pip install zmq
+  287  sudo pip3 install --upgrade pyzmq
+  288  sudo pip install pylivestream
+  289  cd ..
+  290  cd ..;
+  291  cd ..
+  292  q
+  293  cd ..
+  294  cd etc/
+  295  nano environment
+  296  history 
+  297  cd apt/apt.conf.d/
+  298  sudo nano 10proxy 
+  299  sudo pip install pylivestream
+  300  sudo pip --proxy http://192.168.0.1:3128 install pylivestream
+  301  sudo poweroff
+  302  sudo su
+  303  cd Desktop/
+  304  l
+  305  ld
+  306  ls
+  307  python qr-reader.py 
+  308  nano qr-reader.py 
+  309  sudo apt-get install python-zbar
+  310  pip install pyzbar
+  311  sudo pip install pyzbar
+  312  sudo apt-get install libzbar0
+  313  sudo pip install pyzbar
+  314  sudo pip --proxy 192.168.0.1:3128 install pyzbar
+  315  python qr_readerBACKUP.py
+  316  import pyzbar
+  317  python
+  318  sudo python -m pip install pyzbar
+  319  sudo pip3 --proxy 192.168.0.1:3128 install pyzbar
+  320  python3
+  321  sudo apt-get install libcblas-dev
+  322  python3
+  323  sudo apt-get install libhdf5-dev
+  324  sudo apt-get install libhdf5-serial-dev
+  325  sudo apt-get install libatlas-base-dev
+  326  sudo apt-get install libjasper-dev libqtgui4 libqt4-test
+  327  python3
+  328  cd Desktop/
+  329  python3 qr_readerBACKUP.py 
+  330  reboot
+  331  sudo apt-get install motion
+  332  lsusb
+  333  sudo nano /etc/motion/motion.conf
+  334  ls
+  335  raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
+  336  ls
+  337  who
+  338  exit
+  339  raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:8160}' :demux=h264
+  340  raspivid -o - -t 0 -hf -w 800 -h 400 -fps 24 |cvlc -vvv stream:///dev/stdin --sout '#standard{access=http,mux=ts,dst=:3128}' :demux=h264
+  341  ython tst12.y
+  342  python tst12.py
+  343  cd Desktop
+  344  ls
+  345  python tst12.py
+  346  sudo apt-get purge phpmyadmin
+  347  sudo  mysql mysql-server
+  348  sudo apt-get purge mysql mysql-server
+  349  sudo apt-get remove --purge *mysql\*
+  350  poweroff
+  351  sudo apt-get install rpi.gpio
+  352  sudo apt-get install mcrypt
+  353  sudo service apache2 restart
+  354  sudo apt install mysql-server
+  355  sudo mysql_secure_installation
+  356  systemctl status mysql.service
+  357  sudo systemctl start mysql
+  358  sudo apt install phpmyadmin php-mbstring php-gettext
+  359  sudo apt-get install php7.2-cli php7.2-fpm php7.2-curl php7.2-gd php7.2-mysql php7.2-mbstring zip unzip
+  360  sudo phpenmod mbstring
+  361  sudo systemctl restart apache2
+  362  la
+  363  ls
+  364  history > history.txt
+
+
+
+import os
+import time
+while True:
+	def measure_temp():
+        	temp = os.popen("vcgencmd measure_temp").readline()
+	        return (temp.replace("temp=",""))
+
+	while True:
+        	print(measure_temp())
+		time.sleep(1)
