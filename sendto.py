@@ -3,12 +3,15 @@ import numpy as np
 import argparse
 import time
 import cv2
-import os,gc,sys,statistics
+import os,gc
+from colorama import Fore, Back, Style
 start_time = time.time()
 temp_pos=[]
 # flag1=0
 # updatetxt="wait"
-fileName ='cup-pic-up.webm'
+camerafeed='cup.webm'
+# camerafeed=0
+
 
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -46,10 +49,11 @@ ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
 # initialize the video stream, pointer to output video file, and
 # frame dimensions
-vs = cv2.VideoCapture(fileName)#########################################################
+vs =cv2.VideoCapture(camerafeed)#########################################
 
 def toDATABASE():
-	print("//////////////toDATABASE ---> ")
+	
+	print(Fore.BLUE + "[info] DATABASE comlete")
 	writer = None
 	(W, H) = (None, None)
 	old_items= items
@@ -63,7 +67,7 @@ def toDATABASE():
 		# if the frame was not grabbed, then we have reached the end
 		# of the stream
 		if not grabbed:
-			print("[cam dead]")
+			print("[camera dead]")
 			break
 		# if the frame dimensions are empty, grab them
 		if W is None or H is None:
@@ -165,7 +169,16 @@ def toDATABASE():
 				if (countx == 10):
 					print("calibration complete")
 					if(len(items_search)==len(items)):
-						print("item eturned")
+						print("item returned")
+						import mysql.connector
+						mydb = mysql.connector.connect(host="127.0.0.1",  user="root", passwd="12", database="shopdb")
+						mycursor = mydb.cursor()
+						sql = "DELETE FROM items WHERE item = %s"
+						val = (items_search,)
+						mycursor.execute(sql, val)
+
+						mydb.commit()
+						print(mycursor.rowcount, "record DELETED.")
 						exit()
 					else:
 						tracking()
@@ -182,6 +195,8 @@ def toDATABASE():
 	vs.release()
 
 def shelfcame():
+	
+	print(Fore.GREEN + "[info] detection starts")
 	writer = None
 	(W, H) = (None, None)
 	count=0
@@ -323,19 +338,20 @@ def shelfcame():
 				# #print(centerY)
 				count=count+1
 				print("----------------",count)
-				if (count == 10):
+				if (count == 5):
 					cv2.destroyAllWindows()
 					print("calibration complete")
 					return items,item_pos,transortarray,index
+					vs.release()
 					gc.collect()
 					exit()
 					
 
 				cv2.imshow('image',frame)
 
-				if cv2.waitKey(1) == 27:
+				
+				if cv2.waitKey(33) == ord('a'):
 					break
-
 					vs.release()
 					cv2.destroyAllWindows()
 
@@ -344,7 +360,7 @@ def shelfcame():
 	print("[INFO] cleaning up...")
 	#writer.release()
 	
-	vs.release()
+	
 
 #------------------------------------------------------------------
 def tracking():
@@ -353,6 +369,8 @@ def tracking():
 	updatetxt="wait"
 
 	items,item_pos,transortarray,index=shelfcame()
+	print(Fore.RED + "[info] tracking starts")
+	
 	global items
 	print("transport->>",transortarray)
 	print(items,item_pos,"888888",index)
@@ -393,11 +411,15 @@ def tracking():
 	        print('Incorrect tracker name')
 	    return tracker
 	#/////////////////////////////////////////////////////////
-	videoPath = 'cup-pic-up.webm'
+	
 	# Create a video capture object to read videos
-	cap = cv2.VideoCapture(videoPath)
+	# cap = cv2.VideoCapture(camerafeed)
+	print(Style.RESET_ALL)
+	print("//tracking// cam 1")
 	# Read first frame
-	(_, frame) = cap.read()
+	(g, frame) = vs.read()
+	if (g == False):
+		print("camera error at [def tacking]")
 	bboxes = []
 	colors = []
 	# OpenCV's selectROI function doesn't work for selecting multiple objects in Python
@@ -426,8 +448,8 @@ def tracking():
 	for bbox in bboxes:
 	    multiTracker.add(createTrackerByName(trackerType), frame, bbox)
 	# Process video and track objects
-	while cap.isOpened():
-	    (_, frame) = cap.read()
+	while vs.isOpened():
+	    (_, frame) = vs.read()
 
 	  # get updated location of objects in subsequent frames
 	    (_, boxes) = multiTracker.update(frame)
@@ -441,12 +463,28 @@ def tracking():
 	        if(flag1>0):
 	            for j in range (3):#n
 	                diff = (int(newbox[0]) - temp_pos[i])
-	                if(diff>5 or diff < -5):
+	                if(diff>5 or diff < -5):#if item misssing
 	                    print (diff,">>---------->>",i)
 	                    # print(items[i],"missing")
 	                    updatetxt= items[i]+" missing"
-						
+	                    toDBitem = items[i]
+######################################################################
+#####################################################################
+################# write to db ############################
+	                    print("//////////////toDATABASE ---> ")
+	                    import mysql.connector
+	                    import random
+	                    rand_slno = (int(random.uniform(10, 10000)))
+	                    mydb = mysql.connector.connect(host="127.0.0.1",  user="root", passwd="12", database="shopdb")
+	                    mycursor = mydb.cursor()
+	                    sql = "INSERT INTO items (slno,user,item,quantity,price) VALUES (%s, %s,%s, %s,%s)"
+	                    val = (rand_slno,"Abhi", toDBitem,"1","50")
+	                    mycursor.execute(sql, val)
+
+	                    mydb.commit()
+	                    print(mycursor.rowcount, "record inserted.")
 	                    toDATABASE()
+	                    
 	                
 
 	  # show frame+
@@ -470,8 +508,12 @@ def test():
 	item_pos = [347, 54, 0, 0, 0, 0, 0, 0, 0, 0]
 	return items,item_pos
 
+
+
 #------------------------------------------------------------------
 def main():
+	
+	print("main() >> tracking() >> detection() >> toDB()")
 	# test()
 	# shelfcame()
 	tracking()
